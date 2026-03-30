@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predikanttyper — Spela</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Predikanttyper</h1>
+
+    <!-- JOIN -->
+    <div id="screen-join" class="screen active">
+      <div class="join-section">
+        <h2>Gå med i spel</h2>
+        <form id="join-form" class="join-form">
+          <input type="text" id="code-input" placeholder="ABCD" maxlength="4" autocomplete="off" autofocus>
+          <button type="submit" class="btn btn-join">Gå med</button>
+        </form>
+        <div id="join-error" class="error-msg mt-1" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- WAITING FOR START -->
+    <div id="screen-waiting" class="screen">
+      <div class="waiting">
+        <div class="waiting-spinner"></div>
+        <p id="player-label">Du är Spelare 1</p>
+        <p style="color: var(--text-muted);">Väntar på att värden startar spelet...</p>
+      </div>
+    </div>
+
+    <!-- ANSWER ROUND -->
+    <div id="screen-answer" class="screen">
+      <div class="round-header">
+        <span class="round-badge" id="round-label">Omgång 1 av 10</span>
+      </div>
+      <div id="statements-container"></div>
+      <div class="text-center mt-1">
+        <button id="btn-submit" class="btn btn-primary btn-large" disabled>Skicka svar</button>
+      </div>
+    </div>
+
+    <!-- WAITING FOR ROUND END -->
+    <div id="screen-submitted" class="screen">
+      <div class="waiting">
+        <div class="waiting-spinner"></div>
+        <p>Dina svar är inskickade!</p>
+        <p style="color: var(--text-muted);">Väntar på övriga spelare...</p>
+      </div>
+    </div>
+
+    <!-- ROUND RESULTS -->
+    <div id="screen-results" class="screen">
+      <div class="category-card" id="category-card">
+        <h2 class="category-name" id="result-name"></h2>
+        <p class="category-quote" id="result-quote"></p>
+        <p class="category-description" id="result-description"></p>
+        <p class="category-meta"><strong>Favorituttryck:</strong> <span id="result-fav"></span></p>
+        <p class="category-meta"><strong>Skräckscenario:</strong> <span id="result-worst"></span></p>
+      </div>
+
+      <div class="dotplot-container">
+        <p class="dotplot-title">Gruppens fördelning</p>
+        <canvas id="dotplot-round" class="dotplot-canvas"></canvas>
+      </div>
+
+      <div class="waiting">
+        <p style="color: var(--text-muted);">Väntar på att värden går vidare...</p>
+      </div>
+    </div>
+
+    <!-- FINAL RESULTS -->
+    <div id="screen-final" class="screen">
+      <h2 class="text-center mb-1">Slutresultat</h2>
+      <div id="final-plots" class="results-grid"></div>
+
+      <div id="final-correlations" class="mt-2">
+        <h2>Topp-20 samvariationer</h2>
+        <table class="correlation-table" id="correlation-table">
+          <thead>
+            <tr><th>Kategori 1</th><th>Kategori 2</th><th>Korrelation</th></tr>
+          </thead>
+          <tbody id="correlation-body"></tbody>
+        </table>
+      </div>
+
+      <div id="final-clusters" class="mt-2">
+        <h2 class="mb-1">Kluster</h2>
+        <div id="clusters-container"></div>
+      </div>
+    </div>
+
+    <!-- HOST DISCONNECTED -->
+    <div id="screen-disconnected" class="screen">
+      <div class="waiting">
+        <p class="error-msg">Värden har kopplats bort. Spelet är avslutat.</p>
+        <a href="/" class="btn btn-primary mt-2">Tillbaka till start</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/dotplot.js"></script>
+  <script src="/js/player.js"></script>
+</body>
+</html>

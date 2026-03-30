@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predikanttyper</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Predikanttyper</h1>
+    <p class="subtitle">Vilken typ av predikant är du?</p>
+
+    <div class="start-section">
+      <h2>Starta nytt spel</h2>
+      <div class="button-group">
+        <a href="/host.html?version=saklig" class="btn btn-primary">Saklig version</a>
+        <a href="/host.html?version=absurdistisk" class="btn btn-secondary">Absurdistisk version</a>
+      </div>
+    </div>
+
+    <div class="join-section">
+      <h2>Gå med i spel</h2>
+      <form id="join-form" class="join-form">
+        <input type="text" id="code-input" placeholder="Ange spelkod" maxlength="4" autocomplete="off" autofocus>
+        <button type="submit" class="btn btn-join">Gå med</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('join-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = document.getElementById('code-input').value.toUpperCase().trim();
+      if (code.length === 4) {
+        window.location.href = '/play.html?code=' + code;
+      }
+    });
+    // Auto-uppercase
+    document.getElementById('code-input').addEventListener('input', (e) => {
+      e.target.value = e.target.value.toUpperCase();
+    });
+  </script>
+</body>
+</html>

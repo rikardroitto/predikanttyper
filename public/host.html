@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predikanttyper — Host</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Predikanttyper</h1>
+
+    <!-- LOBBY -->
+    <div id="screen-lobby" class="screen active">
+      <div class="text-center">
+        <p class="subtitle" id="version-label"></p>
+        <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Spelkod:</p>
+        <div class="lobby-code" id="game-code">----</div>
+        <div class="qr-container">
+          <canvas id="qr-canvas"></canvas>
+        </div>
+        <div class="lobby-info">
+          <p>Anslutna spelare:</p>
+          <p class="player-count" id="player-count">0</p>
+        </div>
+        <button id="btn-start" class="btn btn-primary btn-large" disabled>Starta spelet</button>
+      </div>
+    </div>
+
+    <!-- ROUND: WAITING FOR ANSWERS -->
+    <div id="screen-round" class="screen">
+      <div class="round-header">
+        <span class="round-badge" id="round-label">Omgång 1 av 10</span>
+        <h2 id="round-category" class="mt-1"></h2>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+      <p class="progress-text" id="progress-text">0 av 0 har svarat</p>
+      <div class="text-center mt-2">
+        <button id="btn-force-end" class="btn btn-danger">Avsluta omgång</button>
+      </div>
+    </div>
+
+    <!-- ROUND RESULTS -->
+    <div id="screen-results" class="screen">
+      <div class="category-card" id="category-card">
+        <h2 class="category-name" id="result-name"></h2>
+        <p class="category-quote" id="result-quote"></p>
+        <p class="category-description" id="result-description"></p>
+        <p class="category-meta"><strong>Favorituttryck:</strong> <span id="result-fav"></span></p>
+        <p class="category-meta"><strong>Skräckscenario:</strong> <span id="result-worst"></span></p>
+      </div>
+
+      <div class="dotplot-container">
+        <p class="dotplot-title">Gruppens fördelning (genomsnitt per person)</p>
+        <canvas id="dotplot-round" class="dotplot-canvas"></canvas>
+      </div>
+
+      <div class="text-center">
+        <button id="btn-next" class="btn btn-primary btn-large">Nästa</button>
+      </div>
+    </div>
+
+    <!-- FINAL RESULTS -->
+    <div id="screen-final" class="screen">
+      <h2 class="text-center mb-1">Slutresultat</h2>
+      <div id="final-plots" class="results-grid"></div>
+
+      <div id="final-correlations" class="mt-2">
+        <h2>Topp-20 samvariationer</h2>
+        <table class="correlation-table" id="correlation-table">
+          <thead>
+            <tr><th>Kategori 1</th><th>Kategori 2</th><th>Korrelation</th></tr>
+          </thead>
+          <tbody id="correlation-body"></tbody>
+        </table>
+      </div>
+
+      <div id="final-clusters" class="mt-2">
+        <h2 class="mb-1">Kluster</h2>
+        <div id="clusters-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/dotplot.js"></script>
+  <script src="/js/host.js"></script>
+</body>
+</html>
