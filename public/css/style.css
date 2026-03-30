@@ -472,6 +472,20 @@ h2 {
 .mt-2 { margin-top: 2rem; }
 .mb-1 { margin-bottom: 1rem; }
 
+.host-link {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
+.host-link a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.host-link a:hover {
+  color: var(--accent-soft);
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   h1 { font-size: 1.8rem; }
